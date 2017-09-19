@@ -47,10 +47,20 @@ void automataUno()
 	{
 		cout << "Introduce el evento: ";
 		cin >> evento;
-		if(estados[contador]=="NEW" && evento=="A")		
-			contador++;		
-		else if(estados[contador]=="READY" && evento=="D")
-			contador++;
+		if(estados[contador]=="NEW")		
+		{
+			if(evento=="A")
+				contador++;
+			else
+				cout << "Simbolo incorrecto\n";
+		}
+		else if(estados[contador]=="READY")
+		{	
+			if(evento=="D")
+				contador++;
+			else
+				cout << "Simbolo incorrecto\n";
+		}
 		else if(estados[contador]=="RUNNING")
 		{
 			if (evento=="R")
@@ -59,9 +69,13 @@ void automataUno()
 				contador--;
 			else if(evento=="W")
 				contador++;
+			else
+				cout << "Simbolo incorrecto\n";
 		}
 		else if(estados[contador]=="BLOCKED" && evento=="E")
-			contador-=2;		
+			contador-=2;	
+		else
+			cout << "Simbolo incorrecto\n";
 
 		cout << "El estado actual es: " << estados[contador] << "\n";
 
@@ -83,16 +97,28 @@ void automataTres()
 	{
 		cout << "Introduce el evento: ";
 		cin >> evento;
-		if(estados[contador]=="NEW" && evento=="A")		
-			contador++;		
-		else if(estados[contador]=="READY/SUSPEND" && evento=="C")
-			contador++;
+		if(estados[contador]=="NEW")		
+		{
+			if(evento=="A")		
+				contador++;		
+			else
+				cout << "Simbolo incorrecto\n";
+		}
+		else if(estados[contador]=="READY/SUSPEND")
+		{
+			if(evento=="C")
+				contador++;
+			else
+				cout << "Simbolo incorrecto\n";
+		}
 		else if(estados[contador]=="READY")
 		{
 			if (evento=="D")
 				contador++;
 			else if(evento=="S")
 				contador--;
+			else
+				cout << "Simbolo incorrecto\n";
 		}
 
 		else if(estados[contador]=="RUNNING")
@@ -105,6 +131,8 @@ void automataTres()
 				contador++;
 			else if(evento=="S")
 				contador-=2;
+			else
+				cout << "Simbolo incorrecto\n";
 		}	
 		else if(estados[contador]=="BLOCKED" )
 		{
@@ -112,6 +140,8 @@ void automataTres()
 				contador-=2;
 			else if(evento=="S")
 				contador++;
+			else
+				cout << "Simbolo incorrecto\n";
 		}
 		else if(estados[contador]=="BLOCKED/SUSPEND" )
 		{
@@ -119,6 +149,8 @@ void automataTres()
 				contador--;
 			else if(evento=="E")
 				contador-=4;
+			else
+				cout << "Simbolo incorrecto\n";
 		}
 
 		cout << "El estado actual es: " << estados[contador] << "\n";

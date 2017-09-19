@@ -9,7 +9,7 @@
 
 using namespace std;
 void automataUno();
-
+void automataTres();
 void main()
 {
 	int num;
@@ -24,6 +24,7 @@ void main()
 	case 2:
 		break;
 	case 3:
+		automataTres();
 		break;
 	default:
 		break;
@@ -69,6 +70,63 @@ void automataUno()
 			
 }
 
+void automataTres()
+{
+	string evento, estados[7];
+	int contador = 0;
+	cout << "Introduce ADMIT, ACTIVATE, DISPATCH, TIMEOUT, EVENTOCCURS, EVENTWAIT, SUSPEND, RELEASE para avanzar entre estados \n";
+	cout << "Estos eventos seran representados por letras: \n";
+	cout << "ADMIT = A, ACTIVATE = C, DISPATCH = D, TIMEOUT = T, EVENTOCCURS = E, EVENTWAIT = W, SUSPEND = S Y RELEASE = R \n";	
+	estados[0]= "NEW", estados[1]= "READY/SUSPEND",estados[2]= "READY",estados[3]= "RUNNING",estados[4]= "BLOCKED",estados[5]= "BLOCKED/SUSPEND",estados[6]= "EXIT";
+	cout << "El estado actual es: " << estados[contador] << "\n";
+	while(estados[contador]!= "EXIT")
+	{
+		cout << "Introduce el evento: ";
+		cin >> evento;
+		if(estados[contador]=="NEW" && evento=="A")		
+			contador++;		
+		else if(estados[contador]=="READY/SUSPEND" && evento=="C")
+			contador++;
+		else if(estados[contador]=="READY")
+		{
+			if (evento=="D")
+				contador++;
+			else if(evento=="S")
+				contador--;
+		}
+
+		else if(estados[contador]=="RUNNING")
+		{
+			if (evento=="R")
+				contador+=3;			
+			else if(evento=="T")
+				contador--;
+			else if(evento=="W")
+				contador++;
+			else if(evento=="S")
+				contador-=2;
+		}	
+		else if(estados[contador]=="BLOCKED" )
+		{
+			if (evento=="E")
+				contador-=2;
+			else if(evento=="S")
+				contador++;
+		}
+		else if(estados[contador]=="BLOCKED/SUSPEND" )
+		{
+			if (evento=="C")
+				contador--;
+			else if(evento=="E")
+				contador-=4;
+		}
+
+		cout << "El estado actual es: " << estados[contador] << "\n";
+
+	}
+	cout << "El estado final es " << estados[contador] << "\n";
+			
+}
 
 
 		
